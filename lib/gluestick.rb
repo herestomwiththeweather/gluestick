@@ -12,9 +12,13 @@ class Glue
   include HTTParty
   base_uri 'api.getglue.com'
 
-  def initialize(username, password)
+  attr_reader :glue_token
+
+  GLUE_API_VERSION = '4.5'
+
+  def initialize()
     @method_family = nil
-    @auth = {:username => username, :password => password}
+    @glue_token = ""
   end
 
   def method_missing(name, *args)
@@ -26,9 +30,13 @@ class Glue
     else
       # The second missing_method is the second part of the method
       # The current API format is "/v1/part_a/part_b?params"
-      method = "/v1/%s/%s" % [@method_family.to_s, name.to_s]
+      method = "/v2/%s/%s" % [@method_family.to_s, name.to_s]
+      @method_family = nil
       # Build HTTParty options from a hash and provide auth
-      options = {:query => args[0], :basic_auth => @auth}
+      glue_params = {:version => GLUE_API_VERSION}
+      glue_params.merge!({:token => @glue_token}) unless @glue_token.empty?
+      glue_params.merge!(args[0]) unless args[0].nil?
+      options = {:query => glue_params}
       begin
         response = self.class.get(method, options)
       rescue SocketError => desc
@@ -39,6 +47,9 @@ class Glue
       raise GlueError.new("404 Not Found") if response.code == 404
       raise GlueError.new("Invalid request") unless (200..299) === response.code
       # Return the response as a hash, thanks to crack
+      if '/v2/user/login' == method
+        @glue_token = response['adaptiveblue']['response']['ping']['token']
+      end
       response
     end
   end

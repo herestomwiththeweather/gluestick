@@ -10,7 +10,8 @@ Every method in the Glue API requires authentication, so you'll also need to use
 
     require 'rubygems'
     require 'gluestick'
-    glue = Glue.new('username', 'password')
+    glue = Glue.new
+    response = glue.user.login({:userId => 'userid', :password => 'password'})
 
 To actually use methods, call the same ones you would as if you were calling them right through HTTP.
 If you wanted to use the `user/friends` method, you would do this:
@@ -24,6 +25,7 @@ Query string parameters are passed through a hash as the first argument. **That'
 ## About
 
 2009 [Justin Poliey](http://justinpoliey.com)
+2010 [HeresTomWithTheWeather](http://www.opensourcecurrency.org)
 
 ## PHP Version
 
