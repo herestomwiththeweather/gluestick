@@ -12,7 +12,7 @@ class Glue
   include HTTParty
   base_uri 'api.getglue.com'
 
-  attr_reader :glue_token
+  attr_accessor :glue_token
 
   GLUE_API_VERSION = '4.5'
 
