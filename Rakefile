@@ -7,12 +7,14 @@ begin
   Jeweler::Tasks.new do |gemspec|
     gemspec.name = "gluestick"
     gemspec.summary = "A simple interface to the Glue API"
-    gemspec.email = "jdp34@njit.edu"
-    gemspec.homepage = "http://github.com/jdp/gluestick"
+    gemspec.email = "herestomwiththeweather@gmail.com"
+    gemspec.homepage = "http://github.com/herestomwiththeweather/gluestick"
     gemspec.description = "A simple interface to the Glue API"
-    gemspec.authors = ["Justin Poliey"]
+    gemspec.authors = ["Justin Poliey","HeresTomWithTheWeather"]
     gemspec.add_dependency "httparty", ">= 0.4.3"
   end
+  Jeweler::GemcutterTasks.new
+
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end

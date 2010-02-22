@@ -18,14 +18,15 @@ If you wanted to use the `user/friends` method, you would do this:
 
     friends = glue.user.friends(:userId => 'jdp')
 
-See the correspondence? `glue.user.friends` maps itself to `http://api.getglue.com/v1/user/friends`.
+See the correspondence? `glue.user.friends` maps itself to `http://api.getglue.com/v2/user/friends`.
 
 Query string parameters are passed through a hash as the first argument. **That's all you need to know.**
 
 ## About
 
 2009 [Justin Poliey](http://justinpoliey.com)
-2010 [HeresTomWithTheWeather](http://www.opensourcecurrency.org)
+
+2010 [HeresTomWithTheWeather](http://www.opensourcecurrency.org) - updated gem for V2
 
 ## PHP Version
 
